@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<HTML lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title style="text-align: center;">Red Web</title>
+    <link rel="icon" type="image/png" href="Lisa/LICAPNG.png">
+</head>
+<link rel="stylesheet" href="Moisait.CSS">
+<style>
+  
+  body{margin:0;background:linear-gradient(135deg,#e7a778,#ffc28d,#ff7043);font-family:Arial,sans-serif;color:#222}
+header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 12px 20px;
+    background: rgba(255, 102, 0, 0.35);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+.logo{font-size:24px;font-weight:800;color:#862200}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 15px;cursor:pointer;font-weight:700;transition:.2s}
+button:hover{transform:scale(1.05)}
+.login{background:#ff5a2a;color:#ffffff}.reg{background:#333;color:#fff}.videoBtn{background:#ffca28}
+#userInfo{font-size:14px}
+.container{max-width:1000px;margin:auto;padding:25px 15px}
+.card{background:rgba(255,255,255,.75);border-radius:18px;padding:20px;margin:18px 0;box-shadow:0 8px 25px #0002}
+.about{text-align:center;background:#111;color:#fff;border-radius:18px;padding:15px}
+.about p,.about h4{background:#a5a5a5;color:#111;padding:8px;margin:8px;border-radius:6px}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.cats img{width:100%;max-height:230px;object-fit:contain;border-radius:10px}
+h1{text-align:center;color:#ff4800;font-family:"Courier New",monospace}
+#videos{display:none}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.video-card{background:#fff;border-radius:16px;padding:12px;box-shadow:0 5px 15px #0002}
+.video-card iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
+#loginNotice{display:none}
+.small{opacity:.75;font-size:13px}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.wide { grid-column: span 2; }
+
+/* Компактный музыкальный блок RedWeb */
+.music-section {
+    width: min(360px, calc(100% - 30px));
+    margin: 22px auto;
+}
+.music-card {
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 6px 20px rgba(90, 35, 0, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.music-title {
+    margin: 0 0 4px;
+    color: #862200;
+    font-size: 19px;
+}
+.music-author {
+    margin: 0 0 12px;
+    color: #70412c;
+    font-size: 13px;
+}
+.music-player-placeholder {
+    min-height: 86px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: rgba(255, 102, 0, 0.12);
+    border: 1px dashed rgba(190, 75, 0, 0.35);
+    text-align: center;
+    color: #71300d;
+    font-size: 12px;
+}
+.music-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 9px;
+    background: #ff6a1a;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+.music-link:hover { background: #e9570b; }
+
+</style>
+<body style="background-color: rgb(231, 167, 120);">
+<header>
+  <img src="Lisa\LICAPNG2.png" alt="...">
+    <div class="logo">RedWeb</div>
+  <div id="userInfo">Вы не вошли</div>
+  <nav>
+    <button class="login" onclick="location.href='VHOD.HTML'">Вход</button>
+    <button class="reg" onclick="location.href='MoiSait2.HTML'">Регистрация</button>
+    <button class="videoBtn" id="videoNav" onclick="showVideos()" style="display:none">🎬 Видео</button>
+    <button id="logoutBtn" onclick="logout()" style="display:none">Выйти</button>
+  </nav>
+</header> 
+
+<script>
+function updateAuth(){
+ const user=JSON.parse(localStorage.getItem('redwebUser')||'null');
+ const logged=!!user;
+ document.getElementById('userInfo').textContent=logged?'👤 '+user.name:'Вы не вошли';
+ document.querySelector('.login').style.display=logged?'none':'inline-block';
+ document.querySelector('.reg').style.display=logged?'none':'inline-block';
+ document.getElementById('videoNav').style.display=logged?'inline-block':'none';
+ document.getElementById('logoutBtn').style.display=logged?'inline-block':'none';
+ document.getElementById('videos').style.display=logged?'block':'none';
+ document.getElementById('loginNotice').style.display=logged?'none':'block';
+}
+function showVideos(){document.getElementById('videos').scrollIntoView({behavior:'smooth'})}
+function logout(){localStorage.removeItem('redwebUser');updateAuth();window.scrollTo({top:0,behavior:'smooth'})}
+updateAuth();
+</script>
+
+
+<hr>
+<h1>Обо мне</h1>
+<div class="grid">
+ <div style="text-align:center;font-family: 'Times New Roman', Times, serif; "><h3>Мне 11 лет</h3></div><div style="text-align:center;font-family: 'Times New Roman', Times, serif; "><h2>Привет!</h2></div><div style="font-family: 'Times New Roman', Times, serif; "><h3>Люблю настолки и програмирование</h3></div>
+ <div style="text-align:center;font-family: 'Times New Roman', Times, serif; "><h3>Я в 5 классе</h3> </div><div style="text-align:center;font-family: 'Times New Roman', Times, serif; "><h3>Я RedFOX</h3></div><div style="font-family: 'Times New Roman', Times, serif; "><h3>Люблю котиков и собак и много других</h3></div>
+</div>
+<hr>
+<h1>Моё творчество</h1>
+
+
+
+<hr>
+<h1>Моя Музыка</h1>
+<h3 style="text-align: center;">Да мне всего 11 лет но я выпускаю треки и тут вы можете их послушать!</h3>
+<main>
+  <section class="music-section" aria-label="Моя музыка">
+    <div class="music-card">
+      <h2 style="text-align: center;" class="music-title">🎵 Моя музыка</h2>
+      <p  style="text-align: center;" "music-author">Никита Костюков</p>
+
+      <!-- Сюда можно вставить настоящий iframe-код Яндекс Музыки,
+           когда будет ссылка «Поделиться → HTML-код». -->
+      <div class="music-player-placeholder">
+        <strong>Яндекс Музыка</strong>
+        <span>Плеер появится здесь после добавления ссылки на трек или плейлист.</span>
+        <span>Нажми на кнопку внизу</span>
+      </div>
+
+      <a class="music-link"
+         href="https://music.yandex.ru/album/38616376/track/143929914?utm_source=web&utm_medium=copy_link"
+         target="_blank" rel="noopener noreferrer">
+        Найти в Яндекс Музыке ↗
+      </a>
+    </div>
+  </section>
+</main>
+
+<hr>
+<h1>Сборник котиков!</h1>\
+<h3 style="text-align: center;">Конечно куда без сборника котиков)</h3>
+<img src="cat.jpg" alt="Кот">
+<img src="cat.jpg" alt="Кот">
+
+
+
+</body>
+</HTML>
